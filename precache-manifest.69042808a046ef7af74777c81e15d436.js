@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/dictionary-app/static/js/runtime~main.d18ffa41.js"
   },
   {
-    "revision": "515bc4d701969edfa02f",
-    "url": "/dictionary-app/static/js/main.515bc4d7.chunk.js"
+    "revision": "818b0bce069f3af632a9",
+    "url": "/dictionary-app/static/js/main.818b0bce.chunk.js"
   },
   {
-    "revision": "2a66abb1c0730d95931f",
-    "url": "/dictionary-app/static/js/1.2a66abb1.chunk.js"
+    "revision": "3260e3075a1158f8220c",
+    "url": "/dictionary-app/static/js/1.3260e307.chunk.js"
   },
   {
-    "revision": "515bc4d701969edfa02f",
-    "url": "/dictionary-app/static/css/main.6246f081.chunk.css"
+    "revision": "818b0bce069f3af632a9",
+    "url": "/dictionary-app/static/css/main.6513b351.chunk.css"
   },
   {
-    "revision": "2a66abb1c0730d95931f",
+    "revision": "3260e3075a1158f8220c",
     "url": "/dictionary-app/static/css/1.98a84e52.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/dictionary-app/scripts/jsstore.worker.js"
   },
   {
-    "revision": "d84457fafb4ae7450d87c7a7acaada3a",
+    "revision": "8b7b9e66d8d271fcaa29ecafd8d24cfb",
     "url": "/dictionary-app/index.html"
   }
 ];
