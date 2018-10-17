@@ -4,12 +4,16 @@ export type FileType = "tsv" | "csv";
 const parse = (type: FileType, data: string) => {
   switch (type) {
     case "tsv":
-      const result = [];
-      data.split("\n").forEach((row, idx) => {
+      return data.split("\n").map<{ entry: string, meaning: string }>(row => {
         const d = row.split("\t");
-        result.push({ entry: d[0], meaning: d[1] });
+        return { entry: d[0], meaning: d[1] };
       });
-      return result;
+
+    case "csv":
+      return data.split("\n").map<{ entry: string, meaning: string }>(row => {
+        const d = row.split(",");
+        return { entry: d[0], meaning: d[1] };
+      });
 
     default:
       throw new Error("Parse Type Invalid");

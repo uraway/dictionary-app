@@ -5,6 +5,11 @@ import parser, { type FileType } from "../utils/parser";
 
 export type Word = { entry: string, meaning: string };
 
+const defaultFilePath =
+  process.env.NODE_ENV === "production"
+    ? "/dictionary-app/ejdic-hand-utf8.txt"
+    : "/ejdic-hand-utf8.txt";
+
 export default class WordService extends BaseService {
   tableName = "";
 
@@ -36,9 +41,15 @@ export default class WordService extends BaseService {
   getWordByEntry(query: string) {
     return this.connection.select({
       from: this.tableName,
+      limit: 100,
       where: {
         entry: {
           like: `%${query}%`
+        },
+        or: {
+          meaning: {
+            like: `%${query}%`
+          }
         }
       }
     });
@@ -49,7 +60,7 @@ export default class WordService extends BaseService {
   }
 
   addDefaultWords = async () => {
-    const { data } = await axios.get("/ejdic-hand-utf8.txt");
+    const { data } = await axios.get(defaultFilePath);
     const parsedWords = parser.parse("tsv", data);
     return this.addWords(parsedWords);
   };

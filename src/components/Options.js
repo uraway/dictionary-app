@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import Spinner from "./ui/Spinner";
 import FileTypeSelect from "./ui/FileTypeSelect";
 import { alert, confirm } from "../utils";
 import WordService from "../service/word";
@@ -10,7 +9,6 @@ import type { FileType } from "../utils/parser";
 const wordService = new WordService();
 
 type Props = {
-  isLoading: boolean,
   addWords: ({ blob: Blob, fileType: FileType }) => Promise<void>
 };
 
@@ -61,7 +59,7 @@ export default class Options extends Component<Props, State> {
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { files } = this.state;
     return (
       <Form id="container">
         <FormGroup>
@@ -75,13 +73,16 @@ export default class Options extends Component<Props, State> {
         <FileTypeSelect
           onChange={value => this.handleChange("fileType", value)}
         />
-        <Button color="info" disabled={isLoading} onClick={this.handleLoad}>
+        <Button
+          color="info"
+          disabled={files.length === 0}
+          onClick={this.handleLoad}
+        >
           LOAD
         </Button>{" "}
-        <Button color="info" disabled={isLoading} onClick={this.handleDelete}>
+        <Button color="info" onClick={this.handleDelete}>
           DELETE
         </Button>
-        {isLoading && <Spinner />}
       </Form>
     );
   }

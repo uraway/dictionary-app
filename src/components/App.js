@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import Search from "./Search";
 import Options from "./Options";
+import Spinner from "./ui/Spinner";
 import { alert, confirm } from "../utils";
 import WordService from "../service/word";
 import type { FileType } from "../utils/parser";
@@ -48,7 +49,7 @@ export default class App extends Component<{}, State> {
        * Load Starts
        */
       let wordCount = 0;
-      this.setState({ isLoading: true, activeTab: "Options" });
+      this.setState({ isLoading: true });
 
       if (payload) {
         // Register from text file
@@ -69,6 +70,9 @@ export default class App extends Component<{}, State> {
        */
       this.setState({ isLoading: false });
     } catch (e) {
+      this.setState({
+        isLoading: false
+      });
       alert({
         title: "エラー",
         content: e.message
@@ -86,6 +90,7 @@ export default class App extends Component<{}, State> {
     const { activeTab, isLoading } = this.state;
     return (
       <Container>
+        {isLoading && <Spinner />}
         <h1>Offline Dictionary</h1>
         <Nav tabs>
           <NavItem>
@@ -117,14 +122,14 @@ export default class App extends Component<{}, State> {
           <TabPane tabId="Search">
             <Row>
               <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Search isLoading={isLoading} />
+                <Search />
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="Options">
             <Row>
               <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Options isLoading={isLoading} addWords={this.addWords} />
+                <Options addWords={this.addWords} />
               </Col>
             </Row>
           </TabPane>
