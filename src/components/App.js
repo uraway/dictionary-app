@@ -13,20 +13,22 @@ import {
 } from "reactstrap";
 import Search from "./Search";
 import Options from "./Options";
-import Spinner from "./ui/Spinner";
 import { alert, confirm } from "../utils";
 import WordService from "../service/word";
 import type { FileType } from "../utils/parser";
+// $FlowIgnore
+import { ReactComponent as SpinnerSVG } from "../Spinner.svg";
+import "./App.css";
 
 const wordService = new WordService();
 
 type State = {
   activeTab: "Search" | "Options",
-  isLoading: boolean
+  isBusy: boolean
 };
 
 export default class App extends Component<{}, State> {
-  state = { activeTab: "Search", isLoading: false };
+  state = { activeTab: "Search", isBusy: false };
 
   async componentDidMount() {
     /**
@@ -39,45 +41,65 @@ export default class App extends Component<{}, State> {
       content: "辞書データが見つかりません。デフォルトの辞書を登録しますか？"
     });
     if (isConfirmed) {
-      this.addWords();
+      this.handleAddWords();
     }
   }
 
-  addWords = async (payload?: { fileType: FileType, blob: Blob }) => {
-    try {
-      /**
-       * Load Starts
-       */
-      let wordCount = 0;
-      this.setState({ isLoading: true });
+  handleAddWords = (payload?: { fileType: FileType, blob: Blob }) => {
+    this.setState(
+      {
+        isBusy: true
+      },
+      async () => {
+        let wordCount;
+        if (payload) {
+          // Register from text file
+          const insertedRows = await wordService.addWordsFromFile(payload);
+          wordCount = insertedRows.length;
+        } else {
+          // Register from default dictionary
+          const insertedRows = await wordService.addDefaultWords();
+          wordCount = insertedRows.length;
+        }
 
-      if (payload) {
-        // Register from text file
-        const rowsInserted = await wordService.addWordsFromFile(payload);
-        wordCount = rowsInserted.length;
-      } else {
-        // Register from default dictionary
-        const rowsInserted = await wordService.addDefaultWords();
-        wordCount = rowsInserted.length;
+        this.setState({
+          isBusy: false
+        });
+        alert({
+          title: "辞書データの登録",
+          content: `${wordCount}語登録しました`
+        });
       }
+    );
+  };
 
-      alert({
-        title: "登録完了",
-        content: `${wordCount}語登録しました`
-      });
-      /**
-       * Load Ends
-       */
-      this.setState({ isLoading: false });
+  handleClearWords = async () => {
+    const isConfirmed = await confirm({
+      title: "辞書データの削除",
+      content: "登録した辞書データをすべて削除します。よろしいですか？"
+    });
+
+    if (!isConfirmed) return;
+
+    this.setState({
+      isBusy: true
+    });
+
+    try {
+      await wordService.clear();
     } catch (e) {
-      this.setState({
-        isLoading: false
-      });
       alert({
         title: "エラー",
         content: e.message
       });
     }
+    alert({
+      title: "辞書データの削除",
+      content: "辞書データをすべて削除しました"
+    });
+    this.setState({
+      isBusy: false
+    });
   };
 
   toggle = (tab: "Search" | "Options") => {
@@ -87,11 +109,13 @@ export default class App extends Component<{}, State> {
   };
 
   render() {
-    const { activeTab, isLoading } = this.state;
+    const { activeTab, isBusy } = this.state;
     return (
       <Container>
-        {isLoading && <Spinner />}
-        <h1>Offline Dictionary</h1>
+        <div className="title-container">
+          <h1>Offline Dictionary</h1>
+          {isBusy && <SpinnerSVG id="spinner" />}
+        </div>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -122,14 +146,18 @@ export default class App extends Component<{}, State> {
           <TabPane tabId="Search">
             <Row>
               <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Search />
+                <Search isBusy={isBusy} />
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="Options">
             <Row>
               <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Options addWords={this.addWords} />
+                <Options
+                  addWords={this.handleAddWords}
+                  clearWords={this.handleClearWords}
+                  isBusy={isBusy}
+                />
               </Col>
             </Row>
           </TabPane>

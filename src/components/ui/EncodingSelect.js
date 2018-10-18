@@ -6,16 +6,12 @@ type Menu = { label: string, payload: string };
 
 const menuItems: Menu[] = [
   {
-    label: "EIJIRO",
-    payload: "eijiro"
+    label: "Shif-JIS",
+    payload: "shift-jis"
   },
   {
-    label: "TSV",
-    payload: "tsv"
-  },
-  {
-    label: "CSV",
-    payload: "csv"
+    label: "UTF-8",
+    payload: "utf8"
   }
 ];
 
@@ -23,7 +19,7 @@ type Props = {
   onChange: (payload: string) => void
 };
 
-export default function FileTypeSelectField({ onChange }: Props) {
+export default function EncodingSelectField({ onChange }: Props) {
   const handleChange = e => {
     const { value } = e.target;
     const menuItem = menuItems.find(o => o.label === value);

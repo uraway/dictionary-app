@@ -5,6 +5,10 @@ import WordGroup from "./WordGroup";
 import SearchInput from "./SearchInput";
 import WordService, { type Word } from "../service/word";
 
+type Props = {|
+  isBusy: boolean
+|};
+
 type State = {
   words: Word[],
   isSearching: boolean
@@ -15,7 +19,7 @@ const wordService = new WordService();
 const serch = text => wordService.getWordByEntry(text);
 const serchDebounce = AwesomeDebouncePromise(serch, 500);
 
-export default class Search extends Component<{}, State> {
+export default class Search extends Component<Props, State> {
   state = { words: [], isSearching: false };
 
   handleChange = async (e: SyntheticInputEvent<HTMLInputElement>) => {
@@ -44,10 +48,15 @@ export default class Search extends Component<{}, State> {
   };
 
   render() {
+    const { isBusy } = this.props;
     const { words, isSearching } = this.state;
     return (
       <div id="container">
-        <SearchInput onChange={this.handleChange} isSearching={isSearching} />
+        <SearchInput
+          onChange={this.handleChange}
+          isSearching={isSearching}
+          disabled={isBusy}
+        />
         <WordGroup words={words} limit={100} />
       </div>
     );

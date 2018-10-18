@@ -19,7 +19,9 @@ export default class WordService extends BaseService {
   }
 
   getWords() {
-    return this.connection.select({ from: this.tableName });
+    return this.connection.select({
+      from: this.tableName
+    });
   }
 
   addWord(word: Word) {
@@ -70,6 +72,16 @@ export default class WordService extends BaseService {
     const content = await this.getFileContent(blob);
     const parsedWords = parser.parse(fileType, content);
     return this.addWords(parsedWords);
+  };
+
+  getChunks = (words: Word[]): Array<Word[]> => {
+    const chunks = [];
+    const size = 1000;
+    for (var i = 0, l = words.length; i < l; i += size) {
+      const end = i + size > words.length ? words.length : i + size;
+      chunks.push(words.slice(i, end));
+    }
+    return chunks;
   };
 
   getFileContent = (blob: Blob, encoding: "utf8" = "utf8") => {
