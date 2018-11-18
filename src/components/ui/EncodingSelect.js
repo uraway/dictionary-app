@@ -6,7 +6,7 @@ type Menu = { label: string, payload: string };
 
 const menuItems: Menu[] = [
   {
-    label: "Shif-JIS",
+    label: "Shift JIS",
     payload: "shift-jis"
   },
   {
