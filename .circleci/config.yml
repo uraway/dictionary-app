@@ -1,0 +1,45 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/node
+
+jobs:
+  test:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies
+      - run: yarn install --network-concurrency 1
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn test
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules/*
+  deploy:
+    executor: default
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run: yarn deploy
+
+workflows:
+  main:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master

@@ -1,51 +1,27 @@
 // @flow
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import Spinner from "./ui/Spinner";
 import FileTypeSelect from "./ui/FileTypeSelect";
-import { alert, confirm } from "../utils";
-import WordService from "../service/word";
-import type { FileType } from "../utils/parser";
+import EncodingSelect from "./ui/EncodingSelect";
+import type { FileType, Encoding } from "../utils/parser";
 
-const wordService = new WordService();
-
-type Props = {
-  isLoading: boolean,
-  addWords: ({ blob: Blob, fileType: FileType }) => Promise<void>
-};
+type Props = {|
+  addWords: ({ blob: Blob, fileType: FileType }) => void,
+  clearWords: () => Promise<void>,
+  isBusy: boolean
+|};
 
 type State = {
   files: Array<Blob>,
-  fileType: FileType
+  fileType: FileType,
+  encoding: Encoding
 };
 
 export default class Options extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { files: [], fileType: "tsv" };
+    this.state = { files: [], fileType: "eijiro", encoding: "shift-jis" };
   }
-
-  handleDelete = async () => {
-    const isConfirmed = await confirm({
-      title: "辞書データの削除",
-      content: "登録した辞書データをすべて削除します。よろしいですか？"
-    });
-
-    if (!isConfirmed) return;
-
-    try {
-      await wordService.clear();
-    } catch (e) {
-      alert({
-        title: "エラー",
-        content: e.message
-      });
-    }
-    alert({
-      title: "辞書データの削除",
-      content: "辞書データの削除に成功しました"
-    });
-  };
 
   handleLoad = () => {
     const { addWords } = this.props;
@@ -61,7 +37,8 @@ export default class Options extends Component<Props, State> {
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { clearWords, isBusy } = this.props;
+    const { files } = this.state;
     return (
       <Form id="container">
         <FormGroup>
@@ -72,16 +49,22 @@ export default class Options extends Component<Props, State> {
             onChange={e => this.handleChange("files", e.target.files)}
           />
         </FormGroup>
+        <EncodingSelect
+          onChange={value => this.handleChange("encoding", value)}
+        />
         <FileTypeSelect
           onChange={value => this.handleChange("fileType", value)}
         />
-        <Button color="info" disabled={isLoading} onClick={this.handleLoad}>
+        <Button
+          color="info"
+          disabled={files.length === 0 || isBusy}
+          onClick={this.handleLoad}
+        >
           LOAD
         </Button>{" "}
-        <Button color="info" disabled={isLoading} onClick={this.handleDelete}>
+        <Button color="info" disabled={isBusy} onClick={clearWords}>
           DELETE
         </Button>
-        {isLoading && <Spinner />}
       </Form>
     );
   }

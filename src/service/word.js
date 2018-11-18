@@ -5,6 +5,11 @@ import parser, { type FileType } from "../utils/parser";
 
 export type Word = { entry: string, meaning: string };
 
+const defaultFilePath =
+  process.env.NODE_ENV === "production"
+    ? "/dictionary-app/ejdic-hand-utf8.txt"
+    : "/ejdic-hand-utf8.txt";
+
 export default class WordService extends BaseService {
   tableName = "";
 
@@ -14,7 +19,9 @@ export default class WordService extends BaseService {
   }
 
   getWords() {
-    return this.connection.select({ from: this.tableName });
+    return this.connection.select({
+      from: this.tableName
+    });
   }
 
   addWord(word: Word) {
@@ -36,10 +43,20 @@ export default class WordService extends BaseService {
   getWordByEntry(query: string) {
     return this.connection.select({
       from: this.tableName,
+      limit: 30,
       where: {
         entry: {
-          like: `%${query}%`
+          like: `${query}%`
+        },
+        or: {
+          meaning: {
+            like: `${query}%`
+          }
         }
+      },
+      order: {
+        by: "entry",
+        type: "asc"
       }
     });
   }
@@ -49,7 +66,7 @@ export default class WordService extends BaseService {
   }
 
   addDefaultWords = async () => {
-    const { data } = await axios.get("/ejdic-hand-utf8.txt");
+    const { data } = await axios.get(defaultFilePath);
     const parsedWords = parser.parse("tsv", data);
     return this.addWords(parsedWords);
   };
@@ -59,6 +76,16 @@ export default class WordService extends BaseService {
     const content = await this.getFileContent(blob);
     const parsedWords = parser.parse(fileType, content);
     return this.addWords(parsedWords);
+  };
+
+  getChunks = (words: Word[]): Array<Word[]> => {
+    const chunks = [];
+    const size = 1000;
+    for (var i = 0, l = words.length; i < l; i += size) {
+      const end = i + size > words.length ? words.length : i + size;
+      chunks.push(words.slice(i, end));
+    }
+    return chunks;
   };
 
   getFileContent = (blob: Blob, encoding: "utf8" = "utf8") => {
