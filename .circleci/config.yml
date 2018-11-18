@@ -30,6 +30,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project
+      - run: git config --global user.email "masato.uraway@gmail.com" && git config --global user.name "uraway"
       - run: yarn deploy
 
 workflows:
