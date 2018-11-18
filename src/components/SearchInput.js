@@ -22,6 +22,7 @@ export default function SearchInput({
         placeholder="英和・和英検索"
         onChange={onChange}
         disabled={disabled}
+        autoComplete="off"
       />
       <Tooltip isOpen={isSearching} target="input" placement="bottom">
         Searching...
