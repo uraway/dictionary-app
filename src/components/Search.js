@@ -24,7 +24,9 @@ export default class Search extends Component<Props, State> {
 
   handleChange = async (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!value) return;
+    if (!value) {
+      return this.setState({ words: [] });
+    }
     /**
      * Search Starts
      */
