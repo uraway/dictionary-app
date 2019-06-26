@@ -12,8 +12,9 @@ export default function WordGroup({ words, limit }: Props) {
   if (!words) return <div />;
   return (
     <ListGroup>
-      {words.slice(0, limit).map((word, idx) => (
-        <ListGroupItem key={word.entry + word.meaning + idx}>
+      {words.filter((w, idx) => words.map((word)=> word.entry + word.meaning).indexOf(w.entry + w.meaning
+      ) === idx).slice(0, limit).map((word) => (
+        <ListGroupItem key={word.entry + word.meaning}>
           {word.entry}: {word.meaning}
         </ListGroupItem>
       ))}
