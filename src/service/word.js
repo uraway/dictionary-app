@@ -43,7 +43,7 @@ export default class WordService extends BaseService {
   getWordByEntry(query: string) {
     return this.connection.select({
       from: this.tableName,
-      limit: 30,
+      limit: 10,
       where: {
         entry: {
           like: `${query}%`
