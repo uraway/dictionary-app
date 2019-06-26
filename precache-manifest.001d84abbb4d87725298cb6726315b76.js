@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "c756594b61aa37007e08",
+    "revision": "5b25136f641274ea0559",
     "url": "/dictionary-app/static/css/main.0dc2b3a9.chunk.css"
   },
   {
-    "revision": "c756594b61aa37007e08",
-    "url": "/dictionary-app/static/js/main.c756594b.chunk.js"
+    "revision": "5b25136f641274ea0559",
+    "url": "/dictionary-app/static/js/main.5b25136f.chunk.js"
   },
   {
     "revision": "d37be7565ef3437ea099",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/dictionary-app/static/media/Spinner.dccfad50.svg"
   },
   {
-    "revision": "c665de067b47008aeb83cc66ce233c17",
+    "revision": "bbc42dfb0aaaec38b4a9428fb0e20e1a",
     "url": "/dictionary-app/index.html"
   }
 ];
