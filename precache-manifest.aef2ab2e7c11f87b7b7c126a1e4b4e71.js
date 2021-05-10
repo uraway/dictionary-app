@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "5b25136f641274ea0559",
-    "url": "/dictionary-app/static/css/main.0dc2b3a9.chunk.css"
+    "revision": "a3586f125f56705a42ea",
+    "url": "/dictionary-app/static/css/main.29a27048.chunk.css"
   },
   {
-    "revision": "5b25136f641274ea0559",
-    "url": "/dictionary-app/static/js/main.5b25136f.chunk.js"
+    "revision": "a3586f125f56705a42ea",
+    "url": "/dictionary-app/static/js/main.a3586f12.chunk.js"
   },
   {
-    "revision": "d37be7565ef3437ea099",
-    "url": "/dictionary-app/static/css/1.bf6ba3fe.chunk.css"
+    "revision": "58d09c0f4767bbe19497",
+    "url": "/dictionary-app/static/css/1.c672d910.chunk.css"
   },
   {
-    "revision": "d37be7565ef3437ea099",
-    "url": "/dictionary-app/static/js/1.d37be756.chunk.js"
+    "revision": "58d09c0f4767bbe19497",
+    "url": "/dictionary-app/static/js/1.58d09c0f.chunk.js"
   },
   {
     "revision": "d18ffa41a02ecee4d3b7",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/dictionary-app/static/media/Spinner.dccfad50.svg"
   },
   {
-    "revision": "bbc42dfb0aaaec38b4a9428fb0e20e1a",
+    "revision": "b5b31d063c0116da22451678dfbb3c76",
     "url": "/dictionary-app/index.html"
   }
 ];
