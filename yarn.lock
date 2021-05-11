@@ -3618,12 +3618,11 @@ cssstyle@^1.0.0:
   dependencies:
     cssom "0.3.x"
 
-customize-cra@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.2.5.tgz#953b7194dd0ad278128745557bb587db56c24050"
-  integrity sha512-AelkqHznIs6qfucHinMbY0ys1i/cKHLiqth0/gr6lkUuDz4VlP0XDoKhrT8fX2LyC191MMpV8MhI7pbOpX0yOQ==
+customize-cra@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.9.1.tgz#76b42c4f537c16329eccc09cfefd804d04c81550"
+  integrity sha512-LISruJ6ak6u+HVQ2vPI+HE4inpPugB73KB9YIpE2J1TW5L1Vrjzm3l2Yupyy+1alJGwAd5GAb5Hfc9qmSUuHow==
   dependencies:
-    lodash.curry "^4.1.1"
     lodash.flow "^3.5.0"
 
 cyclist@~0.2.2:
@@ -6986,11 +6985,6 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
-
-lodash.curry@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.curry/-/lodash.curry-4.1.1.tgz#248e36072ede906501d75966200a86dab8b23170"
-  integrity sha1-JI42By7ekGUB11lmIAqG2riyMXA=
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
