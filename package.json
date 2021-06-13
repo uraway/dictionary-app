@@ -34,7 +34,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "customize-cra": "0.9.1",
+    "customize-cra": "1.0.0",
     "react-app-rewired": "2.1.8",
     "worker-loader": "3.0.8"
   }
