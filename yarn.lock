@@ -6768,10 +6768,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsstore@4.3.4:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/jsstore/-/jsstore-4.3.4.tgz#0841176c3955e66ee649c1a9632a7dc49ad62942"
-  integrity sha512-PPC86ren2uJvibPzNchd8BczWEMx6asimc0XkquEHl74n/EDGYLqT0qMaYQlLzs6g80e0th0aNBd+KCHLoBk5Q==
+jsstore@4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/jsstore/-/jsstore-4.3.5.tgz#c6ab74c46d5895d64d73e19c127e3ba164200d22"
+  integrity sha512-IiQ2xr/L/RKQNiwiUhDXsgBjQ37Kxy4Z0nczWijBRrdueJQzEH6BdnhC8ImEkgxbC8gSWHAGBU78RMahx8HVgg==
 
 jsx-ast-utils@^2.0.1:
   version "2.0.1"
