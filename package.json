@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "awesome-debounce-promise": "2.1.0",
-    "axios": "0.21.1",
+    "axios": "0.21.3",
     "bootstrap": "5.0.2",
     "classnames": "2.3.1",
     "flow-bin": "0.155.0",
