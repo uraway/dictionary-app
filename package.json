@@ -14,7 +14,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "2.1.8",
-    "reactstrap": "8.9.0"
+    "reactstrap": "9.0.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
