@@ -6751,10 +6751,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsstore@4.3.8:
-  version "4.3.8"
-  resolved "https://registry.yarnpkg.com/jsstore/-/jsstore-4.3.8.tgz#aa417d4982c4b98da78aadeb7091e3eaa4f7b4e4"
-  integrity sha512-+cWvRJFfYRSQm0Qq6JSoBPHkk5e7hoJts34Jz86AV7FCbETf60dM2VuAE1cU3H2EZw0JzQwZiOn56GfGtqQmaA==
+jsstore@4.7.3:
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/jsstore/-/jsstore-4.7.3.tgz#26c45d0855029b85b9dbe893117be35f7bbd5b39"
+  integrity sha512-xwIp+JIzgvIDKr31kq7pW9usWMXl3lPxFI7q2HRQWm0f0c1f6jgsSV6aE4din0lIYOvZSFbHINMpQ28wRaqf3g==
 
 jsx-ast-utils@^2.0.1:
   version "2.0.1"
