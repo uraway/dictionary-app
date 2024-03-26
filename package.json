@@ -8,7 +8,7 @@
     "axios": "0.26.1",
     "bootstrap": "5.1.3",
     "classnames": "2.3.1",
-    "flow-bin": "0.174.1",
+    "flow-bin": "0.232.0",
     "gh-pages": "3.2.3",
     "jsstore": "4.3.8",
     "react": "17.0.2",
